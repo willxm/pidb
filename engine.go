@@ -5,7 +5,9 @@ type Record struct {
 }
 
 type Engine interface {
-	New()
-	Insert(key string, value []byte)
-	Find(key string)
+	New() error
+	Set(key string, value []byte) error
+	Get(key string) ([]byte, error)
+	Del(key string) error
+	Exists(key string) (bool, error)
 }
