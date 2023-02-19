@@ -16,7 +16,7 @@ var (
 
 func init() {
 	flag.StringVar(&addr, "addr", ":6380", "server address")
-	flag.StringVar(&engine, "engine", "bptree", "engine type")
+	flag.StringVar(&engine, "engine", "mem", "engine type")
 }
 
 func main() {
