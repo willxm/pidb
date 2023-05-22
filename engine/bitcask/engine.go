@@ -9,6 +9,8 @@ import (
 	"sync/atomic"
 )
 
+// https://riak.com/assets/bitcask-intro.pdf
+
 type Engine struct {
 	data   *os.File
 	index  map[string]int64
