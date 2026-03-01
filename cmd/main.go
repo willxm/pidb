@@ -10,13 +10,17 @@ import (
 )
 
 var (
-	addr   string
-	engine string
+	addr       string
+	engine     string
+	bpTreeFile string
+	lsmDir     string
 )
 
 func init() {
 	flag.StringVar(&addr, "addr", ":6380", "server address")
 	flag.StringVar(&engine, "engine", "mem", "engine type")
+	flag.StringVar(&bpTreeFile, "bptree-file", "/tmp/pidb/bptree.aof", "bptree persistence file")
+	flag.StringVar(&lsmDir, "lsm-dir", "/tmp/pidb/lsm", "lsm tree data directory")
 }
 
 func main() {
@@ -27,9 +31,11 @@ func main() {
 	case "mem":
 		e = &pidb.Mem{}
 	case "lsm_tree":
-		//TODO: implement lsm_tree
+		e = &pidb.LSMTree{Dir: lsmDir}
 	case "bptree":
-		e = &pidb.BpTree{}
+		e = &pidb.BpTree{File: bpTreeFile}
+	case "bitcask":
+		e = &pidb.Bitcask{}
 	default:
 		log.Fatalf("unknown engine type: %s", engine)
 	}

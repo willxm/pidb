@@ -23,5 +23,4 @@ func TestNew(t *testing.T) {
 		t.Error(err)
 	}
 	fmt.Println(string(b2))
-
 }
